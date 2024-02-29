@@ -13,7 +13,32 @@ class GetFilteredData(generics.ListAPIView):
     queryset = YelpData.objects.all()
     serializer_class = YelpDataSerializer
     pagination_class= Pagination
-# get all
+    def get_queryset(self):
+        queryset = YelpData.objects.all()
+        name = self.request.query_params.get('name',None)
+        city = self.request.query_params.get('city',None)
+        state = self.request.query_params.get('state',None)
+        stars = self.request.query_params.get('stars',None)
+        review_count = self.request.query_params.get('review_count',None)
+        postal_code = self.request.query_params.get('postal_code',None)
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+        if city:
+            queryset = queryset.filter(city__icontains=city)
+        if state:
+            queryset = queryset.filter(state__icontains=state)
+        if stars:
+            queryset = queryset.filter(stars__icontains=stars)
+        if review_count:
+            queryset = queryset.filter(review_count__icontains=review_count)
+        if postal_code:
+            queryset = queryset.filter(postal_code__icontains=postal_code)
+        return queryset
+            
+
+        
+        
+
 class GetAllData(generics.ListAPIView):
     queryset = YelpData.objects.all()
     serializer_class = YelpDataSerializer
