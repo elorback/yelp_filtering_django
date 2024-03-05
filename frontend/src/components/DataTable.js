@@ -21,7 +21,7 @@ function DataTable() {
     // as a drop down list
     const fetchDataList = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/fetchdatalist');
+        const response = await fetch('http://localhost:8000/api/GetAllData');
         if (!response.ok) {
           throw new Error("Can't get data from the database...");
         }
@@ -77,7 +77,7 @@ function DataTable() {
       };
 
       const queryString = new URLSearchParams(queryParams).toString();
-      const response = await fetch(`http://localhost:8000/api/filterdata?${queryString}`);
+      const response = await fetch(`http://localhost:8000/api/GetFilteredData?${queryString}`);
 
       if (!response.ok) {
         console.log(response);
