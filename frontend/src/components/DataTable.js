@@ -21,15 +21,15 @@ function DataTable() {
     // as a drop down list
     const fetchDataList = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/GetAllData');
+        const response = await fetch('http://localhost:8000/api/GetStateAndStarList/');
         if (!response.ok) {
           throw new Error("Can't get data from the database...");
         }
         const data = await response.json();
+        console.log(data);
         const stateList = data.data.map((item) => item.state);
         const starList = data.stars.map((item) => item.stars);
 
-        console.log(stateList,starList);
         
         setStatesList(stateList.sort());
         setStarlist(starList.sort());

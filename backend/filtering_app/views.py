@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import generics,pagination
 from .models import YelpData
-from .serializers import YelpDataSerializer
+from .serializers import YelpDataSerializer,StarAndStateSerializer
 
 # class based views handled by djangos rest_framework libraries
 # class for basic pagination 
@@ -9,6 +9,20 @@ from .serializers import YelpDataSerializer
 class Pagination(pagination.PageNumberPagination):
     page_size=25
 # for paginating data in packets of 25
+
+class GetStateAndStarList(generics.ListAPIView):
+    serializer_class = StarAndStateSerializer
+
+    def get_queryset(self):
+        unique_stars = list(YelpData.objects.values_list('stars', flat=True).distinct())
+        unique_state = list(YelpData.objects.values_list('state', flat=True).distinct())
+        
+        # Create a dictionary with 'stars' and 'state' as keys
+        result = {'state': unique_state,'stars': unique_stars}
+        
+        print(result)
+        return Response(result)
+    
 class GetFilteredData(generics.ListAPIView):
     queryset = YelpData.objects.all()
     serializer_class = YelpDataSerializer
@@ -33,6 +47,7 @@ class GetFilteredData(generics.ListAPIView):
             queryset = queryset.filter(review_count__icontains=review_count)
         if postal_code:
             queryset = queryset.filter(postal_code__icontains=postal_code)
+        print(queryset)
         return queryset
             
 
