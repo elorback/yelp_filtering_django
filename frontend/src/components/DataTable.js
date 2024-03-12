@@ -26,9 +26,7 @@ function DataTable() {
           throw new Error("Can't get data from the database...");
         }
         const {states,stars} = await response.json();
-     
         console.log(states)
-        
         setStatesList(states.sort());
         setStarlist(stars.sort());
       } catch (error) {
@@ -75,19 +73,17 @@ function DataTable() {
       };
 
       const queryString = new URLSearchParams(queryParams).toString();
-      const response = await fetch(`http://localhost:8000/api/GetFilteredData?${queryString}`);
+      const response = await fetch(`http://localhost:8000/api/GetFilteredData/?${queryString}`);
 
       if (!response.ok) {
         console.log(response);
         throw new Error("Can't get data from the database...");
       }
       const data = await response.json();
-      const converted = [data.data];
-      
-      console.log(data)
-      
-      console.log(converted);
-      setYelpData((prevdata) => [...prevdata, ...converted[0]]);
+      const {results} = data;
+            
+      console.log(results);
+      setYelpData((prevdata) => [...prevdata, ...results]);
       setPage((prevPage) => prevPage + 1);
     } catch (err) {
       console.error(err);
