@@ -36,9 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',    
     'corsheaders',
-    'filtering_app'
+    'filtering_app',
 ]
 CORS_ALLOW_METHODS = [
     "GET",

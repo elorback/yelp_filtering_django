@@ -12,8 +12,8 @@ class YelpData(models.Model):
     latitude = models.CharField(max_length=150)
     longitude = models.CharField(max_length=150)
     stars = models.CharField(max_length=150)
-    review_count = models.CharField(max_length=10000)
-    is_open = models.BooleanField()
+    review_count = models.IntegerField()
+    is_open = models.BooleanField(default=False)
     categories = models.CharField(max_length=500)
     def __str__(self):
         return self.name
