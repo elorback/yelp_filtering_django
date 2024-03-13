@@ -40,12 +40,13 @@ class GetFilteredData(generics.ListAPIView):
         if state:
             queryset = queryset.filter(state__icontains=state)
         if stars:
-            queryset = queryset.filter(stars__icontains=stars)
+            queryset = queryset.filter(stars__gte=stars)
         if review_count:
-            queryset = queryset.filter(review_count__icontains=review_count)
+            queryset = queryset.filter(review_count__gte=int(review_count))
         if postal_code:
             queryset = queryset.filter(postal_code__icontains=postal_code)
-        print(queryset)
+        
+        print(f'queryset: {queryset} \n\n review count: {review_count}')
         return queryset
             
 

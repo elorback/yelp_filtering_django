@@ -218,7 +218,7 @@ function DataTable() {
                 <Form.Control
                   type="text"
                   placeholder="Zip Code"
-                  name="Postal Code"
+                  name="postal_code"
                   value={postal_code}
                   onChange={handleFilterChange}
                 />
