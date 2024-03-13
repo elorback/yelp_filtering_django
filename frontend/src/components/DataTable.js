@@ -271,7 +271,7 @@ function DataTable() {
               }
             </tbody>
           </Table>
-          {yelpdata.length > 0 && (
+          {yelpdata.length > 0 && yelpdata.length % 25 ===0 &&(
             <div
               style={{
                 display: 'flex',
