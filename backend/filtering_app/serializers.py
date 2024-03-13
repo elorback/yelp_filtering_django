@@ -4,4 +4,4 @@ from .models import YelpData
 class YelpDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = YelpData
-        fields = ['name','city','state','stars','review_count','postal_code']
+        fields = ['name','address','city','state','stars','review_count','postal_code','categories']
